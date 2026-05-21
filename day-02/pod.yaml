@@ -1,0 +1,21 @@
+# apiVersion: which version of the Kubernetes API to use
+# Pod is a core resource so it uses v1
+apiVersion: v1
+
+# kind: type of resource you are creating
+kind: Pod
+
+metadata:
+  # name: how Kubernetes identifies this Pod
+  name: my-pod
+  labels:
+    # labels: key-value pairs used by selectors and services
+    app: my-app
+
+spec:
+  # containers: list of containers to run inside this Pod
+  containers:
+    - name: nginx-container      # name of the container
+      image: nginx               # Docker image to run
+      ports:
+        - containerPort: 80      # port the container listens on
