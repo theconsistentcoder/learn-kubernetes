@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+  labels:
+    app: my-app
+spec:
+  containers:
+    # First container — main app running nginx on port 80
+    - name: nginx-container
+      image: nginx
+      ports:
+        - containerPort: 80
+
+    # Second container — sidecar running busybox
+    # command keeps busybox alive with a sleep loop
+    # without this busybox would exit immediately
+    - name: busybox-container
+      image: busybox
+      command: ["sh", "-c", "sleep 3600"]
