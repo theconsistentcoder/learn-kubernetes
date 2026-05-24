@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-init-pod
+  labels:
+    app: my-app
+spec:
+  # Shared volume between init container and main container
+  volumes:
+    - name: config-vol
+      emptyDir: {}
+
+  # Init container runs first and must complete before main app starts
+  initContainers:
+    - name: init-downloader
+      image: busybox
+      # Downloads a config file and saves it to the shared volume
+      command: ["sh", "-c", "wget -O /etc/config/app.properties https://raw.githubusercontent.com/kubernetes/kubernetes/master/README.md && echo 'Config downloaded successfully'"]
+      volumeMounts:
+        - name: config-vol
+          mountPath: /etc/config
+
+  # Main container starts only after init container completes
+  containers:
+    - name: nginx-container
+      image: nginx
+      ports:
+        - containerPort: 80
+      # Reads the config file downloaded by the init container
+      volumeMounts:
+        - name: config-vol
+          mountPath: /etc/config
