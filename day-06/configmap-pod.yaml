@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-configmap-pod
+  labels:
+    app: my-app
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
+      ports:
+        - containerPort: 80
+      env:
+        # Inject APP_NAME from ConfigMap my-config
+        - name: APP_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: my-config
+              key: APP_NAME
+        # Inject APP_ENV from ConfigMap my-config
+        - name: APP_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: my-config
+              key: APP_ENV
+        # Inject DB_URL from ConfigMap my-config
+        - name: DB_URL
+          valueFrom:
+            configMapKeyRef:
+              name: my-config
+              key: DB_URL
