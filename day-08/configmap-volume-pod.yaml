@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-configmap-vol-pod
+  labels:
+    app: my-app
+spec:
+  volumes:
+    # Mount the ConfigMap as a volume
+    # Kubernetes creates one file per key inside the mount path
+    - name: config-vol
+      configMap:
+        name: my-config
+
+  containers:
+    - name: nginx-container
+      image: nginx
+      ports:
+        - containerPort: 80
+      volumeMounts:
+        # Mount config-vol at /etc/config inside the container
+        # APP_NAME becomes /etc/config/APP_NAME
+        # APP_ENV becomes /etc/config/APP_ENV
+        # DB_URL becomes /etc/config/DB_URL
+        - name: config-vol
+          mountPath: /etc/config
