@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+  labels:
+    app: my-app
+spec:
+  # Number of Pod replicas to run at all times
+  replicas: 3
+  # Selector tells the Deployment which Pods it manages
+  selector:
+    matchLabels:
+      app: my-app
+  # Template is the Pod spec for each replica
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.19
+          ports:
+            - containerPort: 80
