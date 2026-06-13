@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue-deployment
+  labels:
+    app: my-app
+    version: blue
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+      version: blue
+  template:
+    metadata:
+      labels:
+        app: my-app
+        # version: blue is the key label
+        # Service selector matches this to route traffic here
+        version: blue
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.19
+          ports:
+            - containerPort: 80
