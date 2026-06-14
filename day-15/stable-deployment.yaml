@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stable-deployment
+  labels:
+    app: my-app
+    track: stable
+spec:
+  # 9 replicas = roughly 90% of traffic
+  replicas: 9
+  selector:
+    matchLabels:
+      app: my-app
+      track: stable
+  template:
+    metadata:
+      labels:
+        # Same app label as canary — Service routes to both
+        app: my-app
+        track: stable
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.19
+          ports:
+            - containerPort: 80

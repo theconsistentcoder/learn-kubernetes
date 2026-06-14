@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: canary-deployment
+  labels:
+    app: my-app
+    track: canary
+spec:
+  # 1 replica = roughly 10% of traffic
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+      track: canary
+  template:
+    metadata:
+      labels:
+        # Same app label as stable — Service routes to both
+        app: my-app
+        track: canary
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.21
+          ports:
+            - containerPort: 80
