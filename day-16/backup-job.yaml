@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-backup-job
+spec:
+  # Retry up to 4 times if the Job fails before marking it as failed
+  backoffLimit: 4
+  template:
+    spec:
+      containers:
+        - name: backup-container
+          image: busybox
+          # Simulates a real database backup process
+          command:
+            - sh
+            - -c
+            - |
+              echo "Connecting to database..."
+              sleep 2
+              echo "Dumping tables: users, orders, products..."
+              sleep 2
+              echo "Compressing backup file: backup-$(date +%Y%m%d).tar.gz"
+              sleep 2
+              echo "Uploading backup to storage..."
+              sleep 1
+              echo "Backup completed successfully"
+      # Jobs must use Never or OnFailure — never Always
+      restartPolicy: Never
