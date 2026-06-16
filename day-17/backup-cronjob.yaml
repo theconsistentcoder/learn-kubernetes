@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: db-backup-cronjob
+spec:
+  # Every minute for demo purposes
+  # In production use "0 2 * * *" for every day at 2am
+  schedule: "*/1 * * * *"
+  # Forbid means skip a new run if the previous one is still in progress
+  concurrencyPolicy: Forbid
+  # Keep last 3 successful and 1 failed Job records for debugging
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      backoffLimit: 4
+      template:
+        spec:
+          containers:
+            - name: backup-container
+              image: busybox
+              command:
+                - sh
+                - -c
+                - |
+                  echo "Connecting to database..."
+                  sleep 2
+                  echo "Dumping tables: users, orders, products..."
+                  sleep 2
+                  echo "Compressing backup file: backup-$(date +%Y%m%d%H%M).tar.gz"
+                  sleep 2
+                  echo "Uploading backup to storage..."
+                  sleep 1
+                  echo "Backup completed successfully"
+          restartPolicy: Never
