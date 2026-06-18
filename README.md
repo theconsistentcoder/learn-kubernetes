@@ -1,5 +1,5 @@
 # Real-World Kubernetes
-### 40 Kubernetes Concepts Every Developer Must Know
+### 40+ Kubernetes Concepts Every Developer Must Know
 
 A day-by-day Kubernetes learning series with hands-on demos.
 Each folder contains the YAML files and scripts for that day's concept.
@@ -27,29 +27,30 @@ Each folder contains the YAML files and scripts for that day's concept.
 | day-15 | Canary deployments |
 | day-16 | Jobs — run-to-completion workloads |
 | day-17 | CronJobs — scheduled tasks in K8s |
-| day-18 | Node selectors, affinity, taints and tolerations |
-| day-19 | Volumes — emptyDir and hostPath |
-| day-20 | PersistentVolumes and PersistentVolumeClaims |
-| day-21 | StorageClasses |
-| day-22 | SecurityContext — pod vs container level |
-| day-23 | ServiceAccounts — what they are and why they matter |
-| day-24 | RBAC — Roles and RoleBindings explained |
-| day-25 | NetworkPolicies — controlling pod traffic |
-| day-26 | Image security and pulling from private registries |
-| day-27 | ClusterIP vs NodePort vs LoadBalancer |
-| day-28 | Ingress — routing external traffic |
-| day-29 | Ingress controllers — what runs behind the scenes |
-| day-30 | DNS in Kubernetes — how pods find each other |
-| day-31 | Liveness vs Readiness vs Startup probes |
-| day-32 | Reading logs like a pro |
-| day-33 | kubectl exec, describe, events — debug toolkit |
-| day-34 | API deprecations and how to handle them |
-| day-35 | Debugging a broken pod — real-world walkthrough |
-| day-36 | Helm — what it is and why developers use it |
-| day-37 | Helm — installing and upgrading a chart |
-| day-38 | StatefulSets vs Deployments — when state matters |
-| day-39 | DaemonSets — one pod per node explained |
-| day-40 | Resource optimization — HPA and VPA basics |
+| day-18 | Node Selectors and Node Affinity |
+| day-19 | Taints and Tolerations |
+| day-20 | Volumes — emptyDir and hostPath |
+| day-21 | PersistentVolumes and PersistentVolumeClaims |
+| day-22 | StorageClasses |
+| day-23 | SecurityContext — pod vs container level |
+| day-24 | ServiceAccounts — what they are and why they matter |
+| day-25 | RBAC — Roles and RoleBindings explained |
+| day-26 | NetworkPolicies — controlling pod traffic |
+| day-27 | Image security and pulling from private registries |
+| day-28 | ClusterIP vs NodePort vs LoadBalancer |
+| day-29 | Ingress — routing external traffic |
+| day-30 | Ingress controllers — what runs behind the scenes |
+| day-31 | DNS in Kubernetes — how pods find each other |
+| day-32 | Liveness vs Readiness vs Startup probes |
+| day-33 | Reading logs like a pro |
+| day-34 | kubectl exec, describe, events — debug toolkit |
+| day-35 | API deprecations and how to handle them |
+| day-36 | Debugging a broken pod — real-world walkthrough |
+| day-37 | Helm — what it is and why developers use it |
+| day-38 | Helm — installing and upgrading a chart |
+| day-39 | StatefulSets vs Deployments — when state matters |
+| day-40 | DaemonSets — one pod per node explained |
+| day-41 | Resource optimization — HPA and VPA basics |
 
 ---
 

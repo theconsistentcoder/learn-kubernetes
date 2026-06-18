@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-nodeselector-pod
+  labels:
+    app: my-app
+spec:
+  # Only schedules on a node with label gpu=true
+  # Rigid — exact match required, otherwise stays Pending
+  nodeSelector:
+    gpu: "true"
+  containers:
+    - name: nginx-container
+      image: nginx
+      ports:
+        - containerPort: 80
