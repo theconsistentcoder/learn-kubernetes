@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-volume-pod
+  labels:
+    app: my-app
+spec:
+  volumes:
+    # emptyDir is created fresh when Pod starts
+    # Lives as long as the Pod lives
+    # Both containers mount this same volume
+    - name: shared-data
+      emptyDir: {}
+
+  containers:
+    # Writer container — writes message to shared volume every 5 seconds
+    - name: writer
+      image: busybox
+      command: ["sh", "-c", "while true; do echo \"Hello from writer - $(date)\" > /data/message.txt; sleep 5; done"]
+      volumeMounts:
+        - name: shared-data
+          mountPath: /data
+
+    # Reader container — reads message from shared volume
+    - name: reader
+      image: busybox
+      command: ["sh", "-c", "sleep 3600"]
+      volumeMounts:
+        - name: shared-data
+          mountPath: /data

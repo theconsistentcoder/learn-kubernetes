@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-hostpath-pod
+  labels:
+    app: my-app
+spec:
+  volumes:
+    # hostPath mounts a directory from the node's filesystem
+    # Data persists even after the Pod is deleted
+    # But tied to this specific node
+    - name: host-volume
+      hostPath:
+        path: /tmp
+        type: Directory
+
+  containers:
+    - name: nginx-container
+      image: nginx
+      volumeMounts:
+        - name: host-volume
+          mountPath: /host-data
