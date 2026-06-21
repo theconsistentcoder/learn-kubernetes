@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+spec:
+  # Must match the access mode of the PV
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      # Requesting 500Mi — less than PV capacity of 1Gi
+      # Kubernetes will match this to our 1Gi PV
+      storage: 500Mi

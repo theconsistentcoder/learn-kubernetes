@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pvc-pod
+  labels:
+    app: my-app
+spec:
+  volumes:
+    # Reference the PVC by name — not the PV directly
+    # Developer only needs to know the PVC name
+    - name: my-storage
+      persistentVolumeClaim:
+        claimName: my-pvc
+
+  containers:
+    - name: nginx-container
+      image: nginx
+      ports:
+        - containerPort: 80
+      volumeMounts:
+        # Mount the PVC at /storage inside the container
+        - name: my-storage
+          mountPath: /storage
