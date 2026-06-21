@@ -1,5 +1,5 @@
 # Real-World Kubernetes
-### 40+ Kubernetes Concepts Every Developer Must Know
+### 41+ Kubernetes Concepts Every Developer Must Know
 
 A day-by-day Kubernetes learning series with hands-on demos.
 Each folder contains the YAML files and scripts for that day's concept.
