@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-security-pod
+  labels:
+    app: my-app
+spec:
+  # Pod-level SecurityContext — applies to ALL containers in this Pod
+  securityContext:
+    # Run all containers as user ID 1000 — not root (0)
+    runAsUser: 1000
+    # Reject this Pod if any container tries to run as root
+    runAsNonRoot: true
+
+  containers:
+    - name: nginx-container
+      image: nginx
+      ports:
+        - containerPort: 80
+      # Container-level SecurityContext — applies ONLY to this container
+      # Overrides Pod-level settings if they conflict
+      securityContext:
+        # Container filesystem is read-only
+        # Cannot write anywhere except explicitly mounted volumes
+        readOnlyRootFilesystem: true
+        # Prevent process from gaining extra privileges at runtime
+        allowPrivilegeEscalation: false
