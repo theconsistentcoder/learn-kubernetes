@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend
+  namespace: default
+spec:
+  # This policy applies only to Pods with label app: backend
+  podSelector:
+    matchLabels:
+      app: backend
+  policyTypes:
+    - Ingress
+  ingress:
+    # Only allow incoming traffic from Pods with label app: frontend
+    # Everything else is blocked
+    - from:
+        - podSelector:
+            matchLabels:
+              app: frontend

@@ -1,0 +1,12 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-all
+  namespace: default
+spec:
+  # Empty podSelector matches ALL Pods in the namespace
+  podSelector: {}
+  policyTypes:
+    - Ingress
+  # No ingress rules defined — all incoming traffic is blocked
+  # This is your baseline — lock everything down first

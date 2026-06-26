@@ -9,4 +9,4 @@ rules:
     resources: ["pods"]
     # Which actions are allowed on those resources
     # Minimum permissions — read only, no create/delete
-    verbs: ["get", "list", "watch"]
+    verbs: [ "get", "list", "watch"]
