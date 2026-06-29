@@ -4,7 +4,6 @@
 
 # Step 1: Create a docker-registry Secret with credentials
 # Replace placeholder values with your actual registry details
-# NEVER use real credentials in demo recordings
 kubectl create secret docker-registry my-registry-secret \
   --docker-server=registry.example.com \
   --docker-username=my-username \
