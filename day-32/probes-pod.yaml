@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-probes-pod
+  labels:
+    app: my-app
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
+      ports:
+        - containerPort: 80
+      # Startup probe runs first — liveness and readiness are disabled until this passes
+      # Gives nginx up to 300 seconds (30 x 10) to finish starting
+      startupProbe:
+        httpGet:
+          path: /
+          port: 80
+        failureThreshold: 30
+        periodSeconds: 10
+
+      # Liveness probe — is the container still running correctly?
+      # If it fails 3 times in a row, Kubernetes restarts the container
+      livenessProbe:
+        httpGet:
+          path: /
+          port: 80
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        failureThreshold: 3
+        timeoutSeconds: 5
+
+      # Readiness probe — is the container ready to receive traffic?
+      # If it fails, Pod is removed from Service endpoints — no restart
+      readinessProbe:
+        httpGet:
+          path: /
+          port: 80
+        initialDelaySeconds: 5
+        periodSeconds: 5
+        failureThreshold: 3
+        timeoutSeconds: 5
