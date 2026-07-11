@@ -1,0 +1,21 @@
+# Updated to use apps/v1 — the current stable API for Deployments
+# Also added required selector field which was optional in the old API
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-updated-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+          ports:
+            - containerPort: 80
