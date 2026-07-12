@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-broken-pod-1
+  labels:
+    app: broken-app
+spec:
+  containers:
+    - name: nginx-container
+      # Wrong image tag — this tag does not exist
+      # Will cause ImagePullBackOff
+      image: nginx:wrongtag
+      ports:
+        - containerPort: 80
