@@ -9,6 +9,6 @@ spec:
     - name: nginx-container
       # Wrong image tag — this tag does not exist
       # Will cause ImagePullBackOff
-      image: nginx:wrongtag
+      image: nginx:latest
       ports:
         - containerPort: 80
