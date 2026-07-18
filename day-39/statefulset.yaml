@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: my-statefulset
+spec:
+  # Must reference the headless Service for stable DNS
+  serviceName: my-service
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-statefulset
+  template:
+    metadata:
+      labels:
+        app: my-statefulset
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            # Each Pod mounts its own PVC at /data
+            - name: data
+              mountPath: /data
+  # volumeClaimTemplates creates a separate PVC for each Pod
+  # data-my-statefulset-0, data-my-statefulset-1, data-my-statefulset-2
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 100Mi
